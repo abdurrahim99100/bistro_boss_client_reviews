@@ -21,10 +21,12 @@ import SectionTitle from '../../Shared/SectionTitle/SectionTitle';
 const Category = () => {
     return (
         <section>
-            <SectionTitle
-                subHeading={'-----From 11.00 am to 10.00 pm-----'}
-                heading={'-----Order Online-----'}
-            ></SectionTitle>
+            <div className=''>
+                <SectionTitle
+                    subHeading={'-----From 11.00 am to 10.00 pm-----'}
+                    heading={'-----Order Online-----'}
+                ></SectionTitle>
+            </div>
             <Swiper
                 slidesPerView={3}
                 spaceBetween={30}
@@ -33,36 +35,36 @@ const Category = () => {
                     clickable: true,
                 }}
                 modules={[FreeMode, Pagination]}
-                className="mySwiper my-10"
+                className="mySwiper my-10 "
             >
                 <SwiperSlide>
-                    <div className='h-[400px]'>
+                    <div className='h-auto lg:h-[400px]'>
                         <img className='' src={swiper1} alt="" />
-                        <h3 className='uppercase -mt-28 text-4xl text-white'>salad</h3>
+                        <h3 className='uppercase -mt-12 lg:-mt-28 text-xl lg:text-4xl text-white'>salad</h3>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <div className='h-[400px]'>
+                    <div className='h-auto lg:h-[400px]'>
                         <img src={swiper2} alt="" />
-                        <h3 className='uppercase -mt-28 text-4xl text-white'>sup</h3>
+                        <h3 className='uppercase -mt-12 lg:-mt-28 text-xl lg:text-4xl text-white'>sup</h3>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <div className='h-[400px]'>
+                    <div className='h-auto lg:h-[400px]'>
                         <img src={swiper3} alt="" />
-                        <h3 className='uppercase -mt-28 text-4xl text-white'>pizza</h3>
+                        <h3 className='uppercase -mt-12 lg:-mt-28 text-xl lg:text-4xl text-white'>pizza</h3>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <div className='h-[400px]'>
+                    <div className='h-auto lg:h-[400px]'>
                         <img src={swiper4} alt="" />
-                        <h3 className='uppercase -mt-28 text-4xl text-white'>desserts</h3>
+                        <h3 className='uppercase -mt-12 lg:-mt-28 text-xl lg:text-4xl text-white'>desserts</h3>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <div className='h-[400px]'>
+                    <div className='h-auto lg:h-[400px]'>
                         <img src={swiper5} alt="" />
-                        <h3 className='uppercase -mt-28 text-4xl text-white'>chicken</h3>
+                        <h3 className='uppercase -mt-12 lg:-mt-28 text-xl lg:text-4xl text-white'>chicken</h3>
                     </div>
                 </SwiperSlide>
 
