@@ -17,7 +17,7 @@ const Featured = () => {
                     <h3>WHERE CAN I GET SOME?</h3>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error voluptate facere, deserunt dolores maiores quod nobis quas quasi. Eaque repellat recusandae ad laudantium tempore consequatur consequuntur omnis ullam maxime tenetur.</p>
                     <div>
-                        <button className="btn bg-slate-400 border-0 border-b-4 border-gray-900 mt-5">View full menu</button>
+                        <button className="btn btn-outline border-0 border-b-4 border-gray-900 mt-5 text-white">View full menu</button>
                     </div>
                 </div>
             </div>
