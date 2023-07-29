@@ -1,32 +1,27 @@
-import SectionTitle from "../../Shared/SectionTitle/SectionTitle";
-import MenuItems from "../../Shared/MenuItems/MenuItems";
-import UseMenu from "../../../Hooks/UseMenu";
+import SectionTitle from "../../../components/SectionTitle/SectionTitle";
+import MenuItem from "../../Shared/MenuItem/MenuItem";
+import useMenu from "../../../hooks/useMenu";
 
 
 const PopularMenu = () => {
-
-    const [menu] = UseMenu();
-    const popular = menu.filter(item => item.category === 'popular')
+    const [menu] = useMenu();
+    const popular = menu.filter(item => item.category === 'popular');
+    
     return (
-        <section>
-            <div>
-                <SectionTitle
-                    subHeading={"Check it out"}
-                    heading={"from out menu"}
-                >
-                </SectionTitle>
-            </div>
-            <div className="grid md:grid-cols-2">
+        <section className="mb-12">
+            <SectionTitle
+                heading="From Our Menu"
+                subHeading="Popular Items"
+            ></SectionTitle>
+            <div className="grid md:grid-cols-2 gap-10">
                 {
-                    popular.map(item => <MenuItems
+                    popular.map(item => <MenuItem
                         key={item._id}
                         item={item}
-                    ></MenuItems>)
+                    ></MenuItem>)
                 }
             </div>
-            <div className="text-center mb-10">
-                <button className="btn border-0 border-b-4 border-gray-900">View full menu</button>
-            </div>
+            <button className="btn btn-outline border-0 border-b-4 mt-4">View Full Menu</button>
         </section>
     );
 };

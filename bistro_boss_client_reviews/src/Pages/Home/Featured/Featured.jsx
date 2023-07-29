@@ -1,27 +1,24 @@
-import SectionTitle from "../../Shared/SectionTitle/SectionTitle";
-import backgroundImg from '../../../assets/home/featured.jpg';
+import SectionTitle from "../../../components/SectionTitle/SectionTitle";
+import featuredImg from '../../../assets/home/featured.jpg';
 import './Featured.css';
+
 
 const Featured = () => {
     return (
-        <section className="h-[800px] featured bg-fixed">
-            <div className="pt-1 lg:pt-24 text-white">
-                <SectionTitle subHeading="Check it out" heading="from out menu" />
-            </div>
-            <div className="flex-none lg:flex gap-5 justify-center text-white p-5 lg:p-0">
-                <div className="w-auto lg:w-5/12">
-                    <img className="rounded" src={backgroundImg} alt="" />
+        <div className="featured-item bg-fixed text-white pt-8 my-20">
+            <SectionTitle subHeading="check it out" heading="Featured Item" ></SectionTitle>
+            <div className="md:flex justify-center items-center bg-slate-500 bg-opacity-60 pb-20 pt-12 px-36">
+                <div>
+                    <img src={featuredImg} alt="" />
                 </div>
-                <div className="w-auto lg:w-5/12 text-sm lg:text-xl">
-                    <h3>March 20, 2023</h3>
-                    <h3>WHERE CAN I GET SOME?</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error voluptate facere, deserunt dolores maiores quod nobis quas quasi. Eaque repellat recusandae ad laudantium tempore consequatur consequuntur omnis ullam maxime tenetur.</p>
-                    <div>
-                        <button className="btn btn-outline border-0 border-b-4 border-gray-900 mt-5 text-white">View full menu</button>
-                    </div>
+                <div className="md:ml-10">
+                    <p>Aug 20, 2029</p>
+                    <p className="uppercase">Where can i get some?</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate expedita hic dolorem, iusto vel suscipit nam excepturi debitis magnam nostrum! Ut eum dignissimos culpa doloremque eligendi consectetur blanditiis laboriosam fugiat ea quia similique quam nisi reprehenderit numquam magnam nemo vitae cupiditate, atque maiores dicta minus pariatur. Perspiciatis nobis vero quas?</p>
+                    <button className="btn btn-outline border-0 border-b-4 mt-4">Order Now</button>
                 </div>
             </div>
-        </section>
+        </div>
     );
 };
 
