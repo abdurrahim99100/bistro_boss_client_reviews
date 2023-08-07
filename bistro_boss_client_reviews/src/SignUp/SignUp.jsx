@@ -1,19 +1,35 @@
 import { useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const { createUser } = useContext(AuthContext);
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const { createUser, updateUserProfile } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const onSubmit = data => {
+        console.log(data);
         createUser(data.email, data.password)
             .then(result => {
                 const loggedUser = result.user;
                 console.log(loggedUser);
+                updateUserProfile(data.name, data.photoUrl)
+                    .then(() => {
+                        reset();
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'photoURL updated successfully',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        navigate("/");
+                    })
+                    .catch(error => console.log(error))
             })
             .catch(error => {
                 const errorMessage = error.message;
@@ -33,7 +49,7 @@ const SignUp = () => {
                         <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
                     </div>
                     <div className='w-5/12'>
-                        <h3 className="text-center my-5 text-4xl font-light max-w-sm">Sign Up</h3>
+                        <h3 className="text-center my-5 text-4xl font-semibold max-w-sm">Sign Up</h3>
                         <form onSubmit={handleSubmit(onSubmit)} className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                             <div className="card-body">
                                 <div className="form-control">
@@ -45,6 +61,17 @@ const SignUp = () => {
                                     {errors.name?.type === 'required' && <p className="text-yellow-600">Name is required</p>}
                                     {errors.name?.type === "minLength" && <p className="text-yellow-600">Name must be 5 characters</p>}
                                     {errors.name?.type === "maxLength" && <p className="text-yellow-600">Name must be under 11 characters</p>}
+                                </div>
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text">Photo URL</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="photoUrl"
+                                        {...register("photoUrl", { required: true, minLength: 4, maxLength: 10 },)} placeholder="Photo URL" className="input input-bordered" />
+                                    {/* error handle */}
+                                    {errors.photoUrl?.type === 'required' && <p className="text-yellow-600">Photo URL is required</p>}
                                 </div>
                                 <div className="form-control">
                                     <label className="label">

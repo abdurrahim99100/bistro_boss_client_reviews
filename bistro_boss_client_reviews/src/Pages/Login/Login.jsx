@@ -62,7 +62,7 @@ const Login = () => {
                         <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
                     </div>
                     <div className='w-5/12'>
-                        <h3 className="text-center my-5 text-4xl font-light max-w-sm">Login</h3>
+                        <h3 className="text-center my-5 text-4xl font-semibold max-w-sm">Login</h3>
                         <form onSubmit={handleLogin} className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                             <div className="card-body">
                                 <div className="form-control">
