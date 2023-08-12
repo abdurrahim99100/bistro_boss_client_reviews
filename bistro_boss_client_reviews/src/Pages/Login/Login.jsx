@@ -104,7 +104,7 @@ const Login = () => {
                                     </div>
                                 </div>
                                 <div className="form-control">
-                                    <input disabled={disable} className="btn btn-primary" type="submit" value="Login" />
+                                    <input disabled={false} className="btn btn-primary" type="submit" value="Login" />
                                 </div>
                                 <div className='text-[#D1A054]'>
                                     <span>New hear? </span><Link className='font-semibold' to='/signup'>Create a new account</Link>

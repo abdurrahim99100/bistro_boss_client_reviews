@@ -11,9 +11,9 @@ const OrderTab = ({ items }) => {
             return '<span class="' + className + '">' + (index + 1) + "</span>";
         },
     };
+    // TODO: IMPLEMENT PAGINATION HEAR ON THE PAGES;
     return (
         <div >
-
             <Swiper
                 pagination={pagination}
                 modules={[Pagination]}
@@ -30,7 +30,6 @@ const OrderTab = ({ items }) => {
                     </div>
 
                 </SwiperSlide>
-
             </Swiper>
         </div>
     );
