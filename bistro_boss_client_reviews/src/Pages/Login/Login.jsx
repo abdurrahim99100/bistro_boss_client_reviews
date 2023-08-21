@@ -4,6 +4,7 @@ import { AuthContext } from '../../Provider/AuthProvider';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Swal from 'sweetalert2';
+import Social from '../Shared/Social/Social';
 
 const Login = () => {
     const { singIn } = useContext(AuthContext);
@@ -61,9 +62,9 @@ const Login = () => {
                         <h1 className="text-5xl font-bold">Login now!</h1>
                         <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
                     </div>
-                    <div className='w-5/12'>
+                    <div className='w-5/12 card flex-shrink-0 max-w-sm shadow-2xl bg-base-100'>
                         <h3 className="text-center my-5 text-4xl font-semibold max-w-sm">Login</h3>
-                        <form onSubmit={handleLogin} className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+                        <form onSubmit={handleLogin} className="w-full">
                             <div className="card-body">
                                 <div className="form-control">
                                     <label className="label">
@@ -104,13 +105,14 @@ const Login = () => {
                                     </div>
                                 </div>
                                 <div className="form-control">
-                                    <input disabled={false} className="btn btn-primary" type="submit" value="Login" />
+                                    <input disabled={disable} className="btn btn-primary" type="submit" value="Login" />
                                 </div>
                                 <div className='text-[#D1A054]'>
                                     <span>New hear? </span><Link className='font-semibold' to='/signup'>Create a new account</Link>
                                 </div>
                             </div>
                         </form>
+                        <Social></Social>
                     </div>
                 </div>
             </div>

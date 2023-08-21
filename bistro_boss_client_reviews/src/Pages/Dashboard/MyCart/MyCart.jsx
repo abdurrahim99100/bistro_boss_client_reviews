@@ -27,10 +27,12 @@ const MyCart = () => {
                     .then(data => {
                         if (data.deletedCount > 0) {
                             refetch();
-                            Swal.fire(
-                                'Deleted!',
-                                'Your file has been deleted.',
-                                'success'
+                            Swal.fire({
+                                title: 'Deleted!',
+                                text: 'Your file has been deleted.',
+                                icon: 'success',
+                                showConfirmButton: false,
+                            }
                             )
                         }
                     })
