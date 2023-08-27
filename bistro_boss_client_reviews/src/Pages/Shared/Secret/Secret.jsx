@@ -1,9 +1,8 @@
 
-
 const Secret = () => {
     return (
         <div>
-            <h3>This is secret page</h3>
+            <h2>Secret things</h2>
         </div>
     );
 };

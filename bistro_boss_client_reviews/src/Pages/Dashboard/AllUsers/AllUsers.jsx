@@ -1,54 +1,56 @@
-import { faTrashCan, faUserShield } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
+import { FaTrashAlt, FaUserShield } from "react-icons/fa";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+
 
 const AllUsers = () => {
-
+    const [axiosSecure] = useAxiosSecure();
     const { data: users = [], refetch } = useQuery(['users'], async () => {
-        const res = await fetch('http://localhost:5000/users')
-        return res.json();
+        const res = await axiosSecure.get('/users')
+        return res.data;
     })
 
-    const handleMakeAdmin = user => {
-        console.log(user);
+    const handleMakeAdmin = user =>{
         fetch(`http://localhost:5000/users/admin/${user._id}`, {
             method: 'PATCH'
         })
-            .then(res => res.json())
-            .then(data => {
-                if (data.modifiedCount) {
-                    refetch();
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: `${user.displayName} is admin`,
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                }
-            })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            if(data.modifiedCount){
+                refetch();
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: `${user.name} is an Admin Now!`,
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
+            }
+        })
     }
 
-    const handleDeleted = user => {
-        console.log(user);
+    const handleDelete = user => {
+
     }
 
     return (
-        <div>
+        <div className="w-full">
             <Helmet>
-                <title>Bistro Boss | All Users</title>
+                <title>Bistro Boss | All users</title>
             </Helmet>
-            <h3 className="text-4xl font-semibold uppercase my-4">total users: {users.length}</h3>
+            <h3 className="text-3xl font-semibold my-4">Total Users: {users.length}</h3>
             <div className="overflow-x-auto">
                 <table className="table table-zebra w-full">
+                    {/* head */}
                     <thead>
                         <tr>
-                            <th>Number</th>
+                            <th>#</th>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Roll</th>
+                            <th>Role</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -58,17 +60,14 @@ const AllUsers = () => {
                                 <th>{index + 1}</th>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
-                                <td>
-                                    {
-                                        user.role == 'admin' ? 'admin' :
-                                            <button onClick={() => handleMakeAdmin(user)} className="text-[#D1A054] btn btn-ghost text-xl"><FontAwesomeIcon className="text-xl" icon={faUserShield} /></button>
-                                    }
-                                </td>
-                                <td>
-                                    <button onClick={() => handleDeleted(user)} className="bg-red-700 text-white btn btn-ghost"><FontAwesomeIcon icon={faTrashCan} /></button>
-                                </td>
+                                <td>{ user.role === 'admin' ? 'admin' :
+                                    <button onClick={() => handleMakeAdmin(user)} className="btn btn-ghost bg-orange-600  text-white"><FaUserShield></FaUserShield></button> 
+                                    }</td>
+                                <td><button onClick={() => handleDelete(user)} className="btn btn-ghost bg-red-600  text-white"><FaTrashAlt></FaTrashAlt></button></td>
                             </tr>)
                         }
+                        
+                        
                     </tbody>
                 </table>
             </div>

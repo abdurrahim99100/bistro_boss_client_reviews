@@ -6,13 +6,14 @@ import Home from "../pages/Home/Home/Home";
 import Menu from "../pages/Menu/Menu/Menu";
 import Order from "../pages/Order/Order/Order";
 import Login from "../pages/Login/Login";
-import SignUp from "../SignUp/SignUp";
+import SignUp from "../pages/SignUp/SignUp";
 import PrivateRoute from "./PrivateRoute";
 import Secret from "../pages/Shared/Secret/Secret";
 import Dashboard from "../Layout/Dashboard";
 import MyCart from "../pages/Dashboard/MyCart/MyCart";
-import UserHome from "../pages/Dashboard/UserHome/UserHome";
 import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
+import AddItem from "../pages/Dashboard/AddItem/AddItem";
+import AdminRoute from "./AdminRoute";
 
 
 export const router = createBrowserRouter([
@@ -34,38 +35,37 @@ export const router = createBrowserRouter([
       },
       {
         path: 'login',
-        element: <Login />
+        element: <Login></Login>
       },
       {
-        path: 'signUp',
+        path: 'signup',
         element: <SignUp></SignUp>
       },
       {
-        path: "secret",
+        path: 'secret',
         element: <PrivateRoute><Secret></Secret></PrivateRoute>
       }
     ]
   },
-
-  // -----------------------------------------
-  //             dashboard route;
-  // -----------------------------------------
-
   {
-    path: "dashboard",
+    path: 'dashboard',
     element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
     children: [
+
+      // admin related routs.
       {
-        path: "mycart",
+        path: 'addItem',
+        element: <AdminRoute><AddItem></AddItem></AdminRoute>
+      },
+      {
+        path: 'allusers',
+        element: <AllUsers></AllUsers>
+      },
+
+      // users related routs.
+      {
+        path: 'mycart',
         element: <MyCart></MyCart>
-      },
-      {
-        path: "userhome",
-        element: <UserHome></UserHome>
-      },
-      {
-        path: "allusers",
-        element:<AllUsers></AllUsers>
       }
     ]
   }

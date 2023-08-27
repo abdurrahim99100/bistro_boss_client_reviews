@@ -1,83 +1,57 @@
 import { NavLink, Outlet } from "react-router-dom";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faCalendarDays, faCartShopping, faWallet, faUtensils, faBars, faBook, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { FaShoppingCart, FaWallet, FaCalendarAlt, FaHome, FaUtensils, FaBook, FaUsers } from 'react-icons/fa';
 import useCart from "../hooks/useCart";
-
+import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
-
     const [cart] = useCart();
-    const isAdmin = true;
+
+    // TODO: load data from the server to have dynamic isAdmin based on Data
+    // const isAdmin = true;
+    const [isAdmin] = useAdmin();
 
     return (
-        <div className="flex">
-            <div className="bg-[#D1A054] w-4/12 h-[150vh] flex flex-col">
-                <div className="sideBarMenu mt-20 list-none pl-5 uppercase grid gap-y-3 text-xl">
+        <div className="drawer drawer-mobile ">
+            <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+            <div className="drawer-content flex flex-col items-center justify-center">
+                <Outlet></Outlet>
+                <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
+
+            </div>
+            <div className="drawer-side bg-[#D1A054]">
+                <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
+                <ul className="menu p-4 w-80">
+
                     {
                         isAdmin ? <>
-                            <li>
-                                <NavLink to="/dashboard/adminhome" className="flex gap-2 items-center">
-                                    <FontAwesomeIcon className="w-5 h-5" icon={faHome} />admin home
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="/dashboard/additems" className="flex gap-2 items-center">
-                                    <FontAwesomeIcon className="w-5 h-5" icon={faUtensils} />add items
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="/dashboard/manageitems" className="flex gap-2 items-center">
-                                    <FontAwesomeIcon className="w-5 h-5" icon={faBars} />manage items
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="/dashboard/managebooking" className="flex gap-2 items-center">
-                                    <FontAwesomeIcon className="w-5 h-5" icon={faBook} />manage booking
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="/dashboard/allusers" className="flex gap-2 items-center">
-                                    <FontAwesomeIcon className="w-5 h-5" icon={faUsers} />all users
-                                </NavLink>
-                            </li>
+                            <li><NavLink to="/dashboard/home"><FaHome></FaHome> Admin Home</NavLink></li>
+                            <li><NavLink to="/dashboard/addItem"> <FaUtensils></FaUtensils> Add an Items</NavLink></li>
+                            <li><NavLink to="/dashboard/history"><FaWallet></FaWallet> Manage Items</NavLink></li>
+                            <li><NavLink to="/dashboard/history"><FaBook></FaBook> Manage Bookings</NavLink></li>
+                            <li><NavLink to="/dashboard/allusers"><FaUsers></FaUsers> All Users</NavLink></li>
+                            
                         </> : <>
+                            <li><NavLink to="/dashboard/home"><FaHome></FaHome> User Home</NavLink></li>
+                            <li><NavLink to="/dashboard/reservations"><FaCalendarAlt></FaCalendarAlt> Reservations</NavLink></li>
+                            <li><NavLink to="/dashboard/history"><FaWallet></FaWallet> Payment History</NavLink></li>
                             <li>
-                                <NavLink to="/dashboard/userhome" className="flex gap-2 items-center">
-                                    <FontAwesomeIcon className="w-5 h-5" icon={faHome} />user home
+                                <NavLink to="/dashboard/mycart"><FaShoppingCart></FaShoppingCart> My Cart
+                                    <span className="badge inl badge-secondary">+{cart?.length || 0}</span>
                                 </NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="/dashboard/reservations" className="flex gap-2 items-center">
-                                    <FontAwesomeIcon className="w-5 h-5" icon={faCalendarDays} />reservations
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="/dashboard/history" className="flex gap-2 items-center">
-                                    <FontAwesomeIcon className="w-5 h-5" icon={faWallet} />payment history
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="/dashboard/mycart" className="flex gap-2 items-center">
-                                    <FontAwesomeIcon className="w-5 h-5" icon={faCartShopping} />my cart
-                                    <div className="ml-2 badge badge-secondary">+{cart?.length || 0}</div>
-                                </NavLink>
+
                             </li>
                         </>
                     }
-                </div>
-                <div className="divider bg-white h-[2px]"></div>
-                <div className="sideBarMenu mt-5 list-none pl-5 uppercase grid gap-y-3 text-xl">
-                    <li>
-                        <NavLink to="/" className="flex gap-2 items-center">
-                            <FontAwesomeIcon className="w-5 h-5" icon={faHome} />home
-                        </NavLink>
-                    </li>
-                </div>
-            </div>
-            <div className="bg-gray-50 w-full px-20">
-                <div className="mt-20">
-                    <Outlet></Outlet>
-                </div>
+
+
+
+
+                    <div className="divider"></div>
+                    <li><NavLink to="/"><FaHome></FaHome> Home</NavLink> </li>
+                    <li><NavLink to="/menu"> Our Menu</NavLink></li>
+                    <li><NavLink to="/order/salad">Order Food</NavLink></li>
+                </ul>
+
             </div>
         </div>
     );
