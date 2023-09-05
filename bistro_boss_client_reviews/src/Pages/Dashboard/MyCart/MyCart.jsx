@@ -2,13 +2,14 @@ import { Helmet } from "react-helmet-async";
 import useCart from "../../../hooks/useCart";
 import { FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const MyCart = () => {
     const [cart, refetch] = useCart();
-    console.log(cart);
-    // how does reduce work!!!
-    const total = cart.reduce((sum, item) => item.price + sum, 0);
 
+    // how does reduce work!!!
+    const price = cart.reduce((sum, item) => item.price + sum, 0);
+    const total = parseFloat(price.toFixed(2))
     const handleDelete = item => {
         Swal.fire({
             title: 'Are you sure?',
@@ -46,7 +47,7 @@ const MyCart = () => {
             <div className="uppercase font-semibold h-[60px] flex justify-evenly items-center">
                 <h3 className="text-3xl">Total Items: {cart.length}</h3>
                 <h3 className="text-3xl">Total Price: ${total}</h3>
-                <button className="btn btn-warning btn-sm">PAY</button>
+                <Link to='/dashboard/payment'><button className="btn btn-warning btn-sm">PAY</button></Link>
             </div>
             <div className="overflow-x-auto w-full">
                 <table className="table w-full">
@@ -84,8 +85,6 @@ const MyCart = () => {
                                 </td>
                             </tr>)
                         }
-
-
                     </tbody>
                 </table>
             </div>
